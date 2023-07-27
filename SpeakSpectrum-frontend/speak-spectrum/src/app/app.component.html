@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Speak Spectrum</h1>
+
+  <div class="tabs">
+      <div class="tab" [class.active]="activeTab === 'transcript'" (click)="showTab('transcript')">Transcript</div>
+      <div class="tab" [class.active]="activeTab === 'analytics'" (click)="showTab('analytics')">Analytics</div>
+  </div>
+
+  <app-transcript *ngIf="activeTab === 'transcript'"></app-transcript>
+  <app-analytics *ngIf="activeTab === 'analytics'"></app-analytics>
+
+</div>

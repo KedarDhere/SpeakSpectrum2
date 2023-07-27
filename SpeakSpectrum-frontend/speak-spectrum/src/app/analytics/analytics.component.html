@@ -1,0 +1,5 @@
+<div>
+    <button (click)="getTextAnalytics()">Text Analytics</button>
+    <button (click)="getVideoAnalytics()">Video Analytics</button>
+    <div *ngIf="analyticsOutput">{{ analyticsOutput }}</div>
+</div>

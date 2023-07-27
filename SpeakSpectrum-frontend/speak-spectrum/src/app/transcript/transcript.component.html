@@ -1,0 +1,9 @@
+<div class="container">
+    <div>
+        <input type="file" (change)="onFileChange($event)">
+        <button (click)="submitVideo()">Submit</button>
+        <!-- <div *ngIf="transcript">{{ transcript }}</div> -->
+        <div *ngIf="transcript && transcript.length > 0">{{ transcript }}</div>
+
+    </div>
+</div>
