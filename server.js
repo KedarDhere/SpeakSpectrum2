@@ -21,29 +21,13 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import * as SpeechSDK from 'microsoft-cognitiveservices-speech-sdk';
 
-function requireHTTPS(req, res, next) {
-    // The 'x-forwarded-proto' check is for Heroku
-    if (!req.secure && req.get('x-forwarded-proto') !== 'https') {
-        return res.redirect('https://' + req.get('host') + req.url);
-    }
-    next();
-}
-
 
 ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 const app = express();
 const port = 3000;
 
-app.use(requireHTTPS);
 app.use(express.static('./dist/speak-spectrum'));
-
-app.get('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/speak-spectrum/'}),
-);
-
-app.post('/*', (req, res) =>
-    res.sendFile('index.html', {root: 'dist/speak-spectrum/'}),
-);
+app.use(cors());
 
 const storage = multer.memoryStorage(); // Store the video in memory
 const upload = multer({ storage: storage });
@@ -52,7 +36,7 @@ const upload = multer({ storage: storage });
 dotenv.config();
 const ffmpegPath = process.env.FFMPEG_PATH
 
-app.use(cors());
+
 app.post('/uploadVideo', upload.single('video'), async (req, res) => {
     if (!req.file) {
         return res.status(400).send('No video uploaded');
