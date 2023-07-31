@@ -27,4 +27,4 @@ Thumbs.db
 # Ignore compiled or minified files
 *.min.js
 *.min.css
-*.wav
+*.wavnode_modules/
